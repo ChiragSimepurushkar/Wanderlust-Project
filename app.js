@@ -46,6 +46,7 @@ async function main() {
     await mongoose.connect(dbURL);
 }
 
+
 app.set('view engine','ejs');
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
@@ -149,6 +150,8 @@ app.use((err,req,res,next)=>{
     res.status(statusCode).render("error.ejs",{message});
 //    res.status(statusCode).send(message);
 })
-
+store.on("error",(err)=>{
+    console.log("Error in MongoDb Store: ",err);
+});
 
 
