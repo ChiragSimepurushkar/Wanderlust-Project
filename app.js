@@ -56,7 +56,7 @@ app.use(express.static(path.join(__dirname,'/public')));
 const store = MongoStore.create({
     mongoUrl: dbURL,
     crypto:{//for encryption we use crypto
-        secret: "mySuperScreteCode"
+        secret: process.env.SECRET
     },
     //if there is no updation in session from user side, we dont want to update or clear the session data within 24hrs
     touchAfter: 24 * 3600, //secs
@@ -68,7 +68,7 @@ store.on("error",()=>{
 
 const sessionOptions = {
     store,
-    secret: "mySuperScreteCode",
+    secret: process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     cookie: {
@@ -134,13 +134,14 @@ app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
 
-
+app.get("/",(req,res)=>{
+    res.render("home.ejs");
+})
 
 // standard response  (* =>for all req)
-// app.all("*", (err,req,res,next)=>{
-//     next(new ExpressError(404,"PageNot Found!!"));
-//     console.log("......",e)
-// })
+app.all(/.*/, (req,res,next)=>{
+    next(new ExpressError(404,"PageNot Found!!"));
+})
 
 //middleware
 app.use((err,req,res,next)=>{

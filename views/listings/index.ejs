@@ -2,11 +2,41 @@
     <style>
         #filters {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             align-items: center;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 1rem;
+            white-space: nowrap;
+            /* prevent wrapping */
+            -webkit-overflow-scrolling: touch;
+            /* smooth scrolling on mobile */
+            scroll-behavior: smooth;
+            flex-grow: 1;
         }
 
+        #filter-container {
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            gap: 2rem;
+        }
+
+        #filters::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera */
+        }
+
+        #filters {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+
         .filter {
+            flex: 0 0 auto;
             text-align: center;
             margin-right: 2rem;
             margin-top: 2rem;
@@ -27,7 +57,9 @@
         .tax-info {
             display: none;
         }
-        .tax-toggle{
+
+        .tax-toggle {
+            flex-shrink: 0;
             border: 1px solid black;
             border-radius: 1rem;
             height: 3.25rem;
@@ -43,92 +75,93 @@
             Create New Listing
         </button>
     </form> -->
-
-    <div id="filters">
-        <form action="/listings" method="GET">
-            <button class="filter" type="submit">
+    <div id="filter-container">
+        <div id="filters">
+            <form action="/listings" method="GET">
                 <button class="filter" type="submit">
-                    <div><i class="fa-solid fa-house-chimney"></i></div>
-                    <p>All</p>
+                    <button class="filter" type="submit">
+                        <div><i class="fa-solid fa-house-chimney"></i></div>
+                        <p>All</p>
+                    </button>
+            </form>
+            <form action="/listings" method="GET">
+                <input type="hidden" name="category" value="trending">
+                <button class="filter" type="submit">
+                    <div><i class="fa-solid fa-fire"></i></div>
+                    <p>Trending</p>
                 </button>
-        </form>
-        <form action="/listings" method="GET">
-            <input type="hidden" name="category" value="trending">
-            <button class="filter" type="submit">
-                <div><i class="fa-solid fa-fire"></i></div>
-                <p>Trending</p>
-            </button>
-        </form>
-        <form action="/listings" method="GET">
-            <input type="hidden" name="category" value="rooms">
-            <button class="filter" type="submit">
-                <div><i class="fa-solid fa-bed"></i></div>
-                <p>Rooms</p>
-            </button>
-        </form>
-        <form action="/listings" method="GET">
-            <input type="hidden" name="category" value="iconic cities">
-            <button class="filter" type="submit">
-                <div><i class="fa-solid fa-mountain-city"></i></div>
-                <p>Iconic cities</p>
-            </button>
-        </form>
-        <form action="/listings" method="GET">
-            <input type="hidden" name="category" value="mountains">
-            <button class="filter" type="submit">
-                <div><i class="fa-solid fa-mountain-sun"></i></div>
-                <p>Mountains</p>
-            </button>
-        </form>
-        <form action="/listings" method="GET">
-            <input type="hidden" name="category" value="castles">
-            <button class="filter" type="submit">
-                <div><i class="fa-brands fa-fort-awesome"></i></div>
-                <p>Castles</p>
-            </button>
-        </form>
-        <form action="/listings" method="GET">
-            <input type="hidden" name="category" value="amazing pools">
-            <button class="filter" type="submit">
-                <div><i class="fa-solid fa-person-swimming"></i></div>
-                <p>Amazing Pools</p>
-            </button>
-        </form>
-        <form action="/listings" method="GET">
-            <input type="hidden" name="category" value="camping">
-            <button class="filter" type="submit">
-                <div><i class="fa-solid fa-tents"></i></div>
-                <p>Camping</p>
-            </button>
-        </form>
-        <form action="/listings" method="GET">
-            <input type="hidden" name="category" value="farms">
-            <button class="filter" type="submit">
-                <div><i class="fa-solid fa-cow"></i></div>
-                <p>Farms</p>
-            </button>
-        </form>
-        <form action="/listings" method="GET">
-            <input type="hidden" name="category" value="artic">
-            <button class="filter" type="submit">
-                <div><i class="fa-solid fa-snowman"></i></div>
-                <p>Artic</p>
-            </button>
-        </form>
-        <form action="/listings" method="GET">
-            <input type="hidden" name="category" value="domes">
-            <button class="filter" type="submit">
-                <div><i class="fa-solid fa-igloo"></i></div>
-                <p>Domes</p>
-            </button>
-        </form>
-        <form action="/listings" method="GET">
-            <input type="hidden" name="category" value="boats">
-            <button class="filter" type="submit">
-                <div><i class="fa-solid fa-ship"></i></div>
-                <p>Boats</p>
-            </button>
-        </form>
+            </form>
+            <form action="/listings" method="GET">
+                <input type="hidden" name="category" value="rooms">
+                <button class="filter" type="submit">
+                    <div><i class="fa-solid fa-bed"></i></div>
+                    <p>Rooms</p>
+                </button>
+            </form>
+            <form action="/listings" method="GET">
+                <input type="hidden" name="category" value="iconic cities">
+                <button class="filter" type="submit">
+                    <div><i class="fa-solid fa-mountain-city"></i></div>
+                    <p>Iconic cities</p>
+                </button>
+            </form>
+            <form action="/listings" method="GET">
+                <input type="hidden" name="category" value="mountains">
+                <button class="filter" type="submit">
+                    <div><i class="fa-solid fa-mountain-sun"></i></div>
+                    <p>Mountains</p>
+                </button>
+            </form>
+            <form action="/listings" method="GET">
+                <input type="hidden" name="category" value="castles">
+                <button class="filter" type="submit">
+                    <div><i class="fa-brands fa-fort-awesome"></i></div>
+                    <p>Castles</p>
+                </button>
+            </form>
+            <form action="/listings" method="GET">
+                <input type="hidden" name="category" value="amazing pools">
+                <button class="filter" type="submit">
+                    <div><i class="fa-solid fa-person-swimming"></i></div>
+                    <p>Amazing Pools</p>
+                </button>
+            </form>
+            <form action="/listings" method="GET">
+                <input type="hidden" name="category" value="camping">
+                <button class="filter" type="submit">
+                    <div><i class="fa-solid fa-tents"></i></div>
+                    <p>Camping</p>
+                </button>
+            </form>
+            <form action="/listings" method="GET">
+                <input type="hidden" name="category" value="farms">
+                <button class="filter" type="submit">
+                    <div><i class="fa-solid fa-cow"></i></div>
+                    <p>Farms</p>
+                </button>
+            </form>
+            <form action="/listings" method="GET">
+                <input type="hidden" name="category" value="artic">
+                <button class="filter" type="submit">
+                    <div><i class="fa-solid fa-snowman"></i></div>
+                    <p>Artic</p>
+                </button>
+            </form>
+            <form action="/listings" method="GET">
+                <input type="hidden" name="category" value="domes">
+                <button class="filter" type="submit">
+                    <div><i class="fa-solid fa-igloo"></i></div>
+                    <p>Domes</p>
+                </button>
+            </form>
+            <form action="/listings" method="GET">
+                <input type="hidden" name="category" value="boats">
+                <button class="filter" type="submit">
+                    <div><i class="fa-solid fa-ship"></i></div>
+                    <p>Boats</p>
+                </button>
+            </form>
+        </div>
         <div class="tax-toggle">
             <div class="form-check-reverse form-switch">
                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">

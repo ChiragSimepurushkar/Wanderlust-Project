@@ -1,0 +1,10 @@
+<%- layout("layouts/boilerplate")%>
+
+<h1>Welcome to WanderLust!!</h1>
+<% if(curUser){ %>
+
+
+<p>Hello, <%=curUser.username%></p>
+<% }else{%>
+    <p>Please <a href="/login">Login</a> or <a href="/register">Register</a></p>
+    <% } %>
